@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h1>LINE連携中...</h1>
+
+  <script>
+    async function main() {
+
+      try {
+
+        await liff.init({
+          liffId: "2010010685-KjdOhrBL"
+        });
+
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
+
+        const profile = await liff.getProfile();
+
+        const params = new URLSearchParams(location.search);
+
+        const clinicId = params.get("clinicId");
+
+        document.body.innerHTML = `
+          <h1>連携完了</h1>
+          <p>clinicId: ${clinicId}</p>
+          <p>userId: ${profile.userId}</p>
+        `;
+
+      } catch (e) {
+
+        document.body.innerHTML = `
+          <h1>エラー</h1>
+          <pre>${e}</pre>
+        `;
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
