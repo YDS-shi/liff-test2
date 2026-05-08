@@ -28,16 +28,21 @@
         const clinicId = params.get("clinicId");
 
         document.body.innerHTML = `
-          <h1>連携完了</h1>
+          <h1>clinic登録を受け付けました</h1>
           <p>clinicId: ${clinicId}</p>
           <p>userId: ${profile.userId}</p>
+          <p>3秒後にLINEへ戻ります...</p>
         `;
+
+        setTimeout(() => {
+          liff.closeWindow();
+        }, 3000);
 
       } catch (e) {
 
         document.body.innerHTML = `
           <h1>エラー</h1>
-          <pre>${e}</pre>
+          <pre>${JSON.stringify(e, null, 2)}</pre>
         `;
       }
     }
